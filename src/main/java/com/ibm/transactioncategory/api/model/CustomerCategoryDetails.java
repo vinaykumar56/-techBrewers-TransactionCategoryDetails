@@ -14,6 +14,8 @@ public class CustomerCategoryDetails {
 	@Id
 	private String _id;
 	private int customerId;
-	private List<AggregateCategoryDetails> transactionCategoryDetailsList;
+	private List<AggregateCategoryDetails> transactionCategoryDetails;
+
+	public CustomerCategoryDetails(){ }
 	
 }

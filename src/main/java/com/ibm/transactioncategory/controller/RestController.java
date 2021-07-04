@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +40,8 @@ public class RestController {
 	}
 
 	@RequestMapping(method=RequestMethod.GET, path="/get")
-	public @ResponseBody List<CustomerCategoryDetails> getCustomerTransactionCategory(@RequestParam(required=false) Integer customerId) {
+	public ResponseEntity<List<CustomerCategoryDetails>> getCustomerTransactionCategory(@RequestParam(required=false) Integer customerId) {
+
 		System.out.println("aggregate category method get transactions..... start");
 		List<CustomerCategoryDetails> allDocs = null;
 		
@@ -61,8 +64,21 @@ public class RestController {
 				e.printStackTrace();
 			}
 		
-		System.out.println("aggregate category method get transctions..... END");
-		return allDocs;
+		System.out.println("aggregate category method get transctions..... END"+allDocs);
+		return new ResponseEntity<>(allDocs, HttpStatus.OK);
 	}
-	
+
+
+	@RequestMapping(method=RequestMethod.PUT, path="/update",consumes = "application/json")
+	public @ResponseBody void updateCustomerTransactionCategory(@RequestBody List<CustomerCategoryDetails> ccdList) {
+		System.out.println("update category details method..... start");
+		Response r = null;
+		System.out.println("category Details=" + ccdList);
+		if (ccdList != null) {
+			for (CustomerCategoryDetails ccd : ccdList) {
+				System.out.println(ccd.toString());
+				r = db.update(ccd);
+			}
+		}
+	}
 }
