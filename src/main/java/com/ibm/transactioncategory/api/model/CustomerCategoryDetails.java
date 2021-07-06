@@ -13,6 +13,7 @@ public class CustomerCategoryDetails {
 
 	@Id
 	private String _id;
+	private String _rev;
 	private int customerId;
 	private List<AggregateCategoryDetails> transactionCategoryDetails;
 

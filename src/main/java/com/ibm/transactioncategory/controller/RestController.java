@@ -79,6 +79,7 @@ public class RestController {
 				System.out.println(ccd.toString());
 				r = db.update(ccd);
 			}
+			System.out.println("response id ="+r.getId());
 		}
 	}
 }
