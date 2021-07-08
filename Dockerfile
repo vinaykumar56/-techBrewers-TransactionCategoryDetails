@@ -13,4 +13,8 @@ WORKDIR /app
 
 COPY --from=MAVEN_BUILD /build/target/techBrewers-transactionCategoryDetails-1.0.jar /app/
 
+ENV PORT 8081
+
+EXPOSE 8081
+
 ENTRYPOINT ["java", "-jar", "techBrewers-transactionCategoryDetails-1.0.jar"]
